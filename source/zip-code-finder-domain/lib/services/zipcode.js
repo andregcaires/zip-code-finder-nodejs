@@ -11,21 +11,19 @@ var ZipCode = /** @class */ (function () {
         return new ZipCode(zipCode == null ? '' : zipCode)
             .validate();
     };
+    // changes string to array in order to update an character
     ZipCode.prototype.updateCharacterWithZeroByIndex = function (index) {
-        /*
-        this.current = this.current.substring(0, index)
-            + '0'
-            + this.current.substring(index + 1);
-            */
         var temp = Array.from(this.current);
         temp[index] = '0';
         this.current = temp.join('');
     };
+    // validate zip code and return object
     ZipCode.prototype.validate = function () {
         this.removeDash();
         this.isValidZipCode();
         return this;
     };
+    // updates 'valid' property based on the current string
     ZipCode.prototype.isValidZipCode = function () {
         if (this.current.length == this.zipCodeLength && this.isNumeric(this.current)) {
             this.valid = true;
