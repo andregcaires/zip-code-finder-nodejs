@@ -16,13 +16,8 @@ export class ZipCode {
             .validate();
     }
 
+    // changes string to array in order to update an character
     public updateCharacterWithZeroByIndex(index: number): void {
-
-        /*
-        this.current = this.current.substring(0, index) 
-            + '0' 
-            + this.current.substring(index + 1);
-            */
 
         let temp = Array.from(this.current);
         temp[index] = '0';
@@ -31,6 +26,7 @@ export class ZipCode {
 
     }
 
+    // validate zip code and return object
     private validate(): ZipCode {
 
         this.removeDash();
@@ -40,6 +36,7 @@ export class ZipCode {
         return this;
     }
 
+    // updates 'valid' property based on the current string
     private isValidZipCode(): void {
 
         if (this.current.length == this.zipCodeLength && this.isNumeric(this.current)) {
