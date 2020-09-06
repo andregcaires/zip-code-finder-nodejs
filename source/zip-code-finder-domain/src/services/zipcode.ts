@@ -7,11 +7,28 @@ export class ZipCode {
     private constructor(zipCode: string) {
 
         this.current = zipCode;
+        this.valid = false;
     }
 
-    public static createNew(zipCode: string): ZipCode {
+    public static createNew(zipCode?: string): ZipCode {
 
-        return new ZipCode(zipCode).validate();
+        return new ZipCode(zipCode == null ? '' : zipCode)
+            .validate();
+    }
+
+    public updateCharacterWithZeroByIndex(index: number): void {
+
+        /*
+        this.current = this.current.substring(0, index) 
+            + '0' 
+            + this.current.substring(index + 1);
+            */
+
+        let temp = Array.from(this.current);
+        temp[index] = '0';
+
+        this.current = temp.join('');
+
     }
 
     private validate(): ZipCode {
@@ -37,16 +54,20 @@ export class ZipCode {
 
     private isNumeric(zipCode: string): boolean {
 
-        return isNaN(parseInt(zipCode));
+        return !isNaN(parseInt(zipCode));
     }
 
     private removeDash(): void {
 
-        this.current.replace('-', '');
+        this.current = this.current.replace('-', '');
     }
 
     public isValid(): boolean {
 
         return this.valid;
+    }
+
+    public toString(): string {
+        return this.current;
     }
 }
