@@ -65,6 +65,7 @@ export class ZipCode {
     }
 
     public toString(): string {
+        
         return this.current;
     }
 }

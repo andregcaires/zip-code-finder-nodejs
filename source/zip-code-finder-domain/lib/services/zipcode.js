@@ -1,50 +1,49 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ZipCode = void 0;
-var ZipCode = /** @class */ (function () {
-    function ZipCode(zipCode) {
+class ZipCode {
+    constructor(zipCode) {
         this.zipCodeLength = 8;
         this.current = zipCode;
         this.valid = false;
     }
-    ZipCode.createNew = function (zipCode) {
+    static createNew(zipCode) {
         return new ZipCode(zipCode == null ? '' : zipCode)
             .validate();
-    };
+    }
     // changes string to array in order to update an character
-    ZipCode.prototype.updateCharacterWithZeroByIndex = function (index) {
-        var temp = Array.from(this.current);
+    updateCharacterWithZeroByIndex(index) {
+        let temp = Array.from(this.current);
         temp[index] = '0';
         this.current = temp.join('');
-    };
+    }
     // validate zip code and return object
-    ZipCode.prototype.validate = function () {
+    validate() {
         this.removeDash();
         this.isValidZipCode();
         return this;
-    };
+    }
     // updates 'valid' property based on the current string
-    ZipCode.prototype.isValidZipCode = function () {
+    isValidZipCode() {
         if (this.current.length == this.zipCodeLength && this.isNumeric(this.current)) {
             this.valid = true;
         }
         else {
             this.valid = false;
         }
-    };
-    ZipCode.prototype.isNumeric = function (zipCode) {
+    }
+    isNumeric(zipCode) {
         return !isNaN(parseInt(zipCode));
-    };
-    ZipCode.prototype.removeDash = function () {
+    }
+    removeDash() {
         this.current = this.current.replace('-', '');
-    };
-    ZipCode.prototype.isValid = function () {
+    }
+    isValid() {
         return this.valid;
-    };
-    ZipCode.prototype.toString = function () {
+    }
+    toString() {
         return this.current;
-    };
-    return ZipCode;
-}());
+    }
+}
 exports.ZipCode = ZipCode;
 //# sourceMappingURL=zipcode.js.map
