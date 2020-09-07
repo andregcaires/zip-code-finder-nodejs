@@ -1,11 +1,10 @@
 import { ResultDto } from "../dtos/result-dto";
 import { ZipCode } from 'zip-code-finder-domain';
+import {} from 'zip-code-finder-domain'
 
 export abstract class ZipCodeFinderServiceTemplate {
 
     resultDto: ResultDto = new ResultDto();
-
-    index: number = 0;
 
     abstract findAddressBySource(zipcode: ZipCode): void;
 
@@ -17,9 +16,7 @@ export abstract class ZipCodeFinderServiceTemplate {
 
         if (zipCode.isValid()) {
 
-            this.index = zipCode.zipCodeLength - 1;
-
-            while (this.index >= 0) {
+            while (zipCode.hasNextIndex()) {
 
                 this.findAddressBySource(zipCode);
 
@@ -27,9 +24,9 @@ export abstract class ZipCodeFinderServiceTemplate {
 
                     if (this.resultDto.getAddress() == null) {
 
-                        zipCode.updateCharacterWithZeroByIndex(this.index);
+                        zipCode.updateCharacterWithZeroByIndex();
                         
-                        this.index--;
+                        zipCode.nextIndex();
     
                     } else {
     
@@ -40,10 +37,11 @@ export abstract class ZipCodeFinderServiceTemplate {
 
                     // TODO implement logging
                     console.log(error);
+                    zipCode.nextIndex();
                 }                
             }
 
-            if (this.index === 0) {
+            if (!zipCode.hasNextIndex()) {
 
                 this.resultDto.setError('CEP não encontrado');
             }

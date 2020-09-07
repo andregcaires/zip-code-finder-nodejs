@@ -1,10 +1,13 @@
 export declare class ZipCode {
     private current;
     private valid;
+    private index;
     readonly zipCodeLength: number;
     private constructor();
     static createNew(zipCode?: string): ZipCode;
-    updateCharacterWithZeroByIndex(index: number): void;
+    updateCharacterWithZeroByIndex(): void;
+    nextIndex(): void;
+    hasNextIndex(): boolean;
     private validate;
     private isValidZipCode;
     private isNumeric;

@@ -6,16 +6,27 @@ class ZipCode {
         this.zipCodeLength = 8;
         this.current = zipCode;
         this.valid = false;
+        this.index = this.zipCodeLength - 1;
     }
     static createNew(zipCode) {
         return new ZipCode(zipCode == null ? '' : zipCode)
             .validate();
     }
     // changes string to array in order to update an character
-    updateCharacterWithZeroByIndex(index) {
-        let temp = Array.from(this.current);
-        temp[index] = '0';
-        this.current = temp.join('');
+    updateCharacterWithZeroByIndex() {
+        if (this.hasNextIndex()) {
+            let temp = Array.from(this.current);
+            temp[this.index] = '0';
+            this.current = temp.join('');
+        }
+    }
+    nextIndex() {
+        if (this.hasNextIndex()) {
+            this.index--;
+        }
+    }
+    hasNextIndex() {
+        return this.index >= 0;
     }
     // validate zip code and return object
     validate() {

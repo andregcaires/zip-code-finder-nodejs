@@ -5,8 +5,8 @@
   "main": "lib/index.js",
   "types": "lib",
   "scripts": {
-    "test": "tsc -p . && jest",
-    "build": "tsc -p ."
+    "test": "jest",
+    "build": "tsc -p tsconfig.build.json"
   },
   "keywords": [],
   "author": "",
