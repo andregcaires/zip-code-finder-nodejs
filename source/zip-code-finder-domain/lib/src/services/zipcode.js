@@ -1,88 +1,60 @@
-export class ZipCode {
-
-    private current: string;
-    private valid: boolean;
-    private index: number;
-    public readonly zipCodeLength: number = 8;
-
-    private constructor(zipCode: string) {
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ZipCode = void 0;
+class ZipCode {
+    constructor(zipCode) {
+        this.zipCodeLength = 8;
         this.current = zipCode;
         this.valid = false;
         this.index = this.zipCodeLength - 1;
     }
-
-    public static createNew(zipCode?: string): ZipCode {
-
+    static createNew(zipCode) {
         return new ZipCode(zipCode == null ? '' : zipCode)
             .validate();
     }
-
     // changes string to array in order to update an character
-    public updateCharacterWithZeroByIndex(): void {
-
+    updateCharacterWithZeroByIndex() {
         if (this.hasNextIndex()) {
-
             let temp = Array.from(this.current);
             temp[this.index] = '0';
-    
             this.current = temp.join('');
         }
     }
-
-    public nextIndex(): void {
-
+    nextIndex() {
         if (this.hasNextIndex()) {
-
             this.index--;
         }
     }
-
-    public hasNextIndex(): boolean {
-
+    hasNextIndex() {
         return this.index >= 0;
     }
-
     // validate zip code and return object
-    private validate(): ZipCode {
-
+    validate() {
         this.removeDash();
-
         this.isValidZipCode();
-
         return this;
     }
-
     // updates 'valid' property based on the current string
-    private isValidZipCode(): void {
-
+    isValidZipCode() {
         if (this.current.length == this.zipCodeLength && this.isNumeric(this.current)) {
-
             this.valid = true;
-
-        } else {
-
+        }
+        else {
             this.valid = false;
         }
     }
-
-    private isNumeric(zipCode: string): boolean {
-
+    isNumeric(zipCode) {
         return !isNaN(parseInt(zipCode));
     }
-
-    private removeDash(): void {
-
+    removeDash() {
         this.current = this.current.replace('-', '');
     }
-
-    public isValid(): boolean {
-
+    isValid() {
         return this.valid;
     }
-
-    public toString(): string {
-
+    toString() {
         return this.current;
     }
 }
+exports.ZipCode = ZipCode;
+//# sourceMappingURL=zipcode.js.map

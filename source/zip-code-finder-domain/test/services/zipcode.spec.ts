@@ -1,4 +1,5 @@
-const { ZipCode } = require('../../src/services/zipcode')
+//const { ZipCode } = require('../../src/services/zipcode')
+import { ZipCode } from '../../src/services/zipcode'
 
 test('creating invalid zip code object', () => {
 
@@ -27,12 +28,12 @@ test('creating valid zip code object', () => {
 test('updating all characters with zeros', () => {
 
     let zipCode = ZipCode.createNew('14020-525');
-    let index = zipCode.zipCodeLength -1;
 
-    while (index >= 0) {
+    while (zipCode.hasNextIndex()) {
 
-        zipCode.updateCharacterWithZeroByIndex(index);
-        index--;
+        zipCode.updateCharacterWithZeroByIndex();
+        
+        zipCode.nextIndex();
     }
 
     expect(zipCode.isValid()).toBe(true);
@@ -43,9 +44,8 @@ test('updating all characters with zeros', () => {
 test('updating last character with zero', () => {
 
     let zipCode = ZipCode.createNew('14020-525');
-    let lastIndex = zipCode.zipCodeLength - 1;
 
-    zipCode.updateCharacterWithZeroByIndex(lastIndex);
+    zipCode.updateCharacterWithZeroByIndex();
 
     expect(zipCode.isValid()).toBe(true);
     expect(zipCode.toString()).toBe('14020520');
