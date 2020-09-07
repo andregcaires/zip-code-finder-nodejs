@@ -1,5 +1,6 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Res, HttpStatus } from '@nestjs/common';
 import { ZipCodeService } from './zip-code.service';
+import { Response } from 'express';
 
 @Controller('zipcode')
 export class ZipCodeController {
@@ -7,15 +8,17 @@ export class ZipCodeController {
     constructor(private readonly zipCodeService: ZipCodeService) {}
 
     @Get(':zipcode/viacep')
-    async getZipCode(@Param('zipcode') zipCode?: string): Promise<string> {
+    async getZipCode(@Res() response: Response, @Param('zipcode') zipCode?: string) {
 
       const result = await this.zipCodeService.findAddressByZipCode(zipCode);
 
       if (result.getError() == null) {
 
-          return JSON.stringify(result.getAddress());
-      }
+          response.status(HttpStatus.OK).json(result.getAddress());
 
-      return JSON.stringify(result.getError());
+      } else{
+
+        response.status(HttpStatus.BAD_REQUEST).json(result.getError());
+      }
     }
 }
