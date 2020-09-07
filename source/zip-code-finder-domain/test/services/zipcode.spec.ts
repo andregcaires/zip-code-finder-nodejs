@@ -1,5 +1,4 @@
-//const { ZipCode } = require('../../src/services/zipcode')
-import { ZipCode } from '../../src/services/zipcode'
+import { ZipCode } from '../../src/services/zipcode';
 
 test('creating invalid zip code object', () => {
 

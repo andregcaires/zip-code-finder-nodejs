@@ -2,7 +2,7 @@ import { AddressDto } from "./address-dto";
 
 export class ViaCepResponseDto {
     
-    erro: string = '';
+    erro: boolean = false;
 
     cep: string = '';
     logradouro: string = '';
@@ -10,9 +10,4 @@ export class ViaCepResponseDto {
     bairro: string = '';
     localidade: string = '';
     uf: string = '';
-        
-    toAddressDto(): AddressDto {
-
-        return new AddressDto(this.cep, this.uf, this.localidade, this.bairro, this.logradouro);
-    }
 }

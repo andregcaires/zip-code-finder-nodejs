@@ -6,11 +6,9 @@ export abstract class ZipCodeFinderServiceTemplate {
 
     resultDto: ResultDto = new ResultDto();
 
-    abstract findAddressBySource(zipcode: ZipCode): void;
+    abstract async findAddressBySource(zipcode: ZipCode): Promise<ResultDto>;
 
-    findAddressByZipCode(zipCodeString?: string): ResultDto {
-
-        this.resultDto = new ResultDto();
+    async findAddressByZipCode(zipCodeString?: string): Promise<ResultDto> {
 
         let zipCode = ZipCode.createNew(zipCodeString);
 
@@ -18,7 +16,7 @@ export abstract class ZipCodeFinderServiceTemplate {
 
             while (zipCode.hasNextIndex()) {
 
-                this.findAddressBySource(zipCode);
+                this.resultDto = await this.findAddressBySource(zipCode);
 
                 try {
 

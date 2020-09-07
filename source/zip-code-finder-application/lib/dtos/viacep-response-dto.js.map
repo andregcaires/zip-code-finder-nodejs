@@ -1,0 +1,1 @@
+{"version":3,"file":"viacep-response-dto.js","sourceRoot":"","sources":["../../src/dtos/viacep-response-dto.ts"],"names":[],"mappings":";;;AAEA,MAAa,iBAAiB;IAA9B;QAEI,SAAI,GAAY,KAAK,CAAC;QAEtB,QAAG,GAAW,EAAE,CAAC;QACjB,eAAU,GAAW,EAAE,CAAC;QACxB,gBAAW,GAAW,EAAE,CAAC;QACzB,WAAM,GAAW,EAAE,CAAC;QACpB,eAAU,GAAW,EAAE,CAAC;QACxB,OAAE,GAAW,EAAE,CAAC;IACpB,CAAC;CAAA;AAVD,8CAUC"}
